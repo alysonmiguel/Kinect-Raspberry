@@ -58,11 +58,11 @@
     <div class="row mt-5 pt-5">
       <div class=" col-md-12 text-center mt-5">
 
-        <h2 class="h3  text-center">Como usar o Kinect junto ao Raspberry</h2>
+        <h3 class="h3 text-white text-center">Como usar o Kinect junto ao Raspberry</h3>
 
         <br> <br> <br> <br> <br> <br> <br>
 
-        <a class="scroll" href="#dados">
+        <a class="scroll" href="#kinect">
           <ion-icon class="proximo animated fadeInDown" name="arrow-down"></ion-icon>
 
         </a>
@@ -92,18 +92,14 @@
                 Kinect
               </h3>
               <p class="text-justify">
-                Kinect é um sensor demovimentos desenvolvido exclusivamente para os consoles Xbox 360 e Xbox One, ambos
-                da Microsoft.
-              </p>
-              <p class="text-justify">
-                Este aparelho permite que os jogadores possam ter uma experiência de jogabilidade diferente da
-                tradicional, devido ao fato de dispensar o uso de controles ou joysticks para jogar.
+                O Kinect é um sensor de movimentos que foi desenvolvido com intuito de melhorar a experiência dos
+                jogadores e a jogabilidade, devido ao fato de dispensar o uso de controles ou joysticks para jogar.
               </p>
               <p class="text-justify">
                 A tecnologia do Kinect permite que os jogadores interajam livremente com os jogos de videogame, sem ter
                 a necessidade de ter o controle em mãos, ou seja, apenas através dos movimentos do próprio corpo. Este
                 dispositivo foi considerado uma inovação, principalmente pelas tecnologias já utilizadas pelos
-                concorrentes, como o Wii da Nintendo.
+                concorrentes.
               </p>
               <p class="text-justify">
                 O Kinect funciona através de duas câmeras, uma que reconhece o rosto da pessoa e outra infravermelha,
@@ -115,8 +111,10 @@
                 jogadores do som ambiente, além de conseguir captar comandos de voz.
               </p>
               <p class="text-justify">
+
                 O Kinect compreende linguagens, sinais e movimentos, e faz com que os jogadores possam jogar e brincar,
                 sem precisar estar segurando nada para que o jogo faça os mesmos movimentos.
+
               </p>
             </div>
           </div>
@@ -144,12 +142,19 @@
                 Raspberry
               </h3>
               <p class="text-justify">
-                O Raspberry Pi 3 é a terceira geração do famoso miniPC que tem o tamanho de um cartão. A placa é um
-                computador barato, portátil e versátil, usado principalmente em projetos de programação, robótica e em
-                iniciativas em geral com software e hardware livre. Algumas utilidades do dia a dia incluem criação de
-                servidor de arquivos pessoal e videogame retrô. O miniPC roda o sistema operacional Ubuntu, Raspbian e
-                outras distribuições do Linux. Além disso, é compatível com o Windows 10 IoT, versão do software da
-                Microsoft feita para automação doméstica e outras aplicações envolvendo Internet das Coisas.
+                O Raspberry Pi é um computador de baixo custo e bem pequeno aproximando-se muito ao tamanho de um cartão
+                de crédito, foi desenvolvido no Reino Unido pela Fundação Raspberry Pi. Para usá-lo, basta plugar um
+                teclado e um mouse padrão a ele e conectar tudo isso a um monitor ou a uma televisão. Os modelos custam
+                entre US$ 25 e US$ 35.
+              </p>
+              <p class="text-justify">
+                A função básica desse equipamento é oferecer uma alternativa barata, prática e acessível para que
+                pessoas de várias idades possam explorar todas as capacidades da computação. Além disso, também visa
+                facilitar a aprendizagem de programação em linguagens como Scratch e Python.
+              </p>
+              <p class="text-justify">
+                Algumas utilidades do dia a dia incluem criação de servidor de arquivos pessoal, videogame retrô e
+                outras.
               </p>
 
             </div>
@@ -173,34 +178,70 @@
 
         <h3 class="display-5">Como usar?</h3>
         <p class="text-justify">
-          O Kinect é um equipamento que foi desenvolvido para melhorar a experiência em jogos, no entanto, também
-          podemos fazer uso das ferramentas que ele disponibiliza de outras maneiras e nesse tutorial será mostrado duas
-          formas de utiliza-lo.
+          Para começar a utilização do Raspberry é necessário roda um sistema operacional como Ubuntu, Raspbian e outras
+          distribuições do Linux. após realizar a instalação ligamos o Kinect e conectamos a entrada usb no Raspberry.
+        </p>
+        <p class="text-justify">
+          E então podemos fazer uso do Kinect com o Raspberry de diversas maneiras, mas nesse tutorial será mostrado
+          apenas duas formas de utiliza-lo, à primeira será como uma simples câmera e a segunda como um dispositivo que
+          possamos controlar com programação.
         </p>
 
         <div class="row">
           <div class="col-12">
             <ul class="nav nav-pills justify-content-center" id="pills-nav" role="tablist">
               <li class="nav-item">
-                <a href="#nav-item-01" class="nav-link active" id="nav-pills-01" data-toggle="pill">Como uma simples
+                <a href="#nav-item-01" class="nav-link active" id="nav-pills-01" data-toggle="pill">Como uma
                   câmera</a>
               </li>
 
               <li class="nav-item">
-                <a href="#nav-item-02" class="nav-link" id="nav-pills-02" data-toggle="pill">Como uma feramenta para
-                  progamação</a>
+                <a href="#nav-item-02" class="nav-link" id="nav-pills-02" data-toggle="pill">Feramenta para
+                  programação</a>
               </li>
             </ul>
 
             <div class="tab-content" id="nav-pills-cintent">
               <div class="tab-pane fade show active" id="nav-item-01" role="tabpanel">
                 <p class="text-justify">
-                  Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
-                  classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin
-                  professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words,
-                  consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical
-                  literature, discovered the undoubtable source. Lorem Ipsum
+                  Se é desejado usar apenas vídeo existe um driver no kernel! Que pode ser carregado assim: <br>
                 </p>
+                <p class="text-justify ml-3">
+                  <code>
+                    modprobe videodev <br>
+                    modprobe gspca_main <br>
+                    modprobe gspca_kinect  <br>
+                  </code>
+                </p>
+                <p class="text-justify">
+                  Ao fazer isso você obtém um novo / dev / videoX e pode usá-lo como uma webcam, mas para testar se está
+                  conectado com a câmera do Kinect ao Raspberry, instale o guvcview.
+                </p>
+                <p class="ml-3">
+                  <code>
+                    sudo apt-get install guvcview
+                  </code>
+                </p>
+                <p class="text-justify">
+
+                  Em seguida, digite <code>sudo guvcview </code>no terminal e ele deverá abrir um painel de opções e a
+                  visão de controle da câmera, mas se retorna algum erro pode ser o audio então execute esse comando
+                  <code>sudo guvcview --audio=none</code>, e se tudo ocorreu bem abrirá algo parecido com essa imagem.
+                </p>
+
+                <div class="container">
+                  <div class="row">
+
+                    <div class="col">
+                      <figure class="figure">
+                        <img src="img/gu.PNG" class="figure-img img-fluid rounded"
+                          alt="Imagem de um quadrado genérico com bordas arredondadas, em uma figure.">
+                        <figcaption class="figure-caption text-center">Imagem do guvcview em funcionamento</figcaption>
+                      </figure>
+                    </div>
+
+                  </div>
+                </div>
 
               </div>
 
