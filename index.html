@@ -74,7 +74,6 @@
 
   </div>
   <main>
-
     <!-- Botão para volta ao topo-->
     <div class="box">
       <a class="scroll " href="#img-prin">
@@ -131,7 +130,6 @@
       </div>
     </section>
 
-
     <section id="raspberry">
       <div class="container">
         <div class="row">
@@ -172,14 +170,13 @@
       </div>
     </section>
 
-
     <section id="como">
       <div class="container">
 
         <h3 class="display-5">Como usar?</h3>
         <p class="text-justify">
           Para começar a utilização do Raspberry é necessário roda um sistema operacional como Ubuntu, Raspbian e outras
-          distribuições do Linux. após realizar a instalação ligamos o Kinect e conectamos a entrada usb no Raspberry.
+          distribuições do Linux, nesse tutorial será usado o Raspbian, após realizar a instalação ligamos o Kinect e conectamos a entrada usb no Raspberry.
         </p>
         <p class="text-justify">
           E então podemos fazer uso do Kinect com o Raspberry de diversas maneiras, mas nesse tutorial será mostrado
@@ -204,7 +201,7 @@
             <div class="tab-content" id="nav-pills-cintent">
               <div class="tab-pane fade show active" id="nav-item-01" role="tabpanel">
                 <p class="text-justify">
-                  Se é desejado usar apenas vídeo existe um driver no kernel! Que pode ser carregado assim: <br>
+                  Já que é desejado usar apenas vídeo existe um driver no kernel! Que pode ser carregado assim: <br>
                 </p>
                 <p class="text-justify ml-3">
                   <code>
@@ -246,13 +243,153 @@
               </div>
 
               <div class="tab-pane fade  " id="nav-item-02" role="tabpanel">
-                <p class="text-justify">
-                  Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
-                  classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin
-                  professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words,
-                  consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical
-                  literature, discovered the undoubtable source. Lorem Ipsum
+                <strong>Principais ferramentas para o tutorial </strong> <br>
+               <p class="text-justify ml-3">
+                Raspbian <br>
+                  Python3 <br>
+                  OpenCV 3.4 <br>
+                  Libfreenect <br>
                 </p>
+              
+                <p class="text-justify">
+                  <strong> Expandir o sistema de arquivos</strong> <br>
+                  Digite o seguinte comando para expandir o sistema de arquivos Raspberry Pi3 <br>
+                  <code class="ml-3">sudo raspi-config</code><br>
+                  Em seguida, selecione o seguinte: Opções avançadas >> A1 Expandir sistema de arquivos >> Pressione "Enter" e será
+                  exibido uma mensagem "A partição raiz foi redimensionada", Então reinici o sistema.
+                </p>
+
+                <p class="text-justify">
+                  <strong>  Instalando as dependências </strong> <br>
+                  A primeira etapa é atualizar e atualizar todos os pacotes existentes e enseguida reinici <br>
+                </p>
+                  <p class="ml-3">
+                    <code> 
+                      sudo apt-get update <br> 
+                      sudo apt-get upgrade <br>
+                      sudo shutdown -r now <br>
+                    </code> 
+                  </p>
+              
+                  <p class="text-justify">
+                    Após reiniciar, inicie o Terminal novamente. Faça o seguinte.
+                  </p>
+                  <p class="text-justify">
+                    Instale os pacotes de desenvolvedor do CMAKE <br>
+                    <code class="ml-3">sudo apt-get install build-essential cmake pkg-config -y</code>
+                  </p>
+                  <p class="text-justify">
+                    Instalar pacotes de E / S de imagem <br>
+                    <code class="ml-3">sudo apt-get install libjpeg-dev libtiff5-dev libjasper-dev libpng12-dev -y</code>
+                  </p>
+                  <p class="text-justify">
+                    Instalar pacotes de E / S de vídeo <br>
+                    <code class="ml-3">sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev -y</code> <br>
+                    <code class="ml-3">sudo apt-get install libxvidcore-dev libx264-dev -y</code>
+                  </p>
+                  <p class="text-justify">
+                    Instale a biblioteca de desenvolvimento GTK para janelas básicas da GUI <br>
+                    <code class="ml-3">sudo apt-get install libgtk2.0-dev libgtk-3-dev -y</code>
+                  </p>
+                  <p class="text-justify">
+                    Instale pacotes de otimização (operações de matriz aprimoradas para OpenCV)<br>
+                    <code class="ml-3">sudo apt-get install libatlas-base-dev gfortran -y</code>
+                  </p>
+
+                <strong>Instale o Python 3, setuptools, dev e Numpy</strong> <br>
+                <p class="ml-3">
+                  <code>
+                    sudo apt-get install python3 python3-setuptools python3-dev -y <br>
+                    wget https://bootstrap.pypa.io/get-pip.py <br>
+                    sudo python3 get-pip.py <br>
+                    sudo pip3 install numpy <br>
+                  </code>
+                </p>  
+                <strong>Faça o download dos módulos extras OpenCV 3.4 e contrib</strong> <br>
+                <p class="ml-3">
+                  <code>
+                    cd ~  <br>
+                    wget -O opencv.zip https://github.com/Itseez/opencv/archive/3.4.0.zip <br>
+                    unzip opencv.zip <br>
+                    wget -O opencv_contrib.zip https://github.com/Itseez/opencv_contrib/archive/3.4.0.zip <br>
+                    unzip opencv_contrib.zip <br>
+                  </code>
+                </p> 
+                <strong> Compile e instale o OpenCV 3.4.0 para Python 3</strong> <br>
+                <pre>
+  cd opencv-3.4.0
+  mkdir build
+  cd build
+  cmake -D CMAKE_BUILD_TYPE=RELEASE \
+  -D CMAKE_INSTALL_PREFIX=/usr/local \
+  -D BUILD_opencv_java=OFF \
+  -D BUILD_opencv_python2=OFF \
+  -D BUILD_opencv_python3=ON \
+  -D PYTHON_DEFAULT_EXECUTABLE=$(which python3) \
+  -D INSTALL_C_EXAMPLES=OFF \
+  -D INSTALL_PYTHON_EXAMPLES=ON \
+  -D BUILD_EXAMPLES=ON\
+  -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib-3.4.0/modules \
+  -D WITH_CUDA=OFF \
+  -D BUILD_TESTS=OFF \
+  -D BUILD_PERF_TESTS= OFF ..              
+                  </pre>
+
+                  <p class="text-justify">Digite o seguinte comando para compilá-lo usando 4 núcleos de pi
+                    <code>make -j4</code> 
+                  </p>
+                  <p class="text-justify">Após a compilação bem-sucedida, instale a compilação usando o seguinte comando
+                    <code>sudo make install && ldconfig</code>
+                  </p>
+
+                  <strong>Libfreenect e suas dependências</strong> <br>
+                  <code class="text-justify ml-3">sudo apt-get install git-core cmake freeglut3-dev pkg-config build-essential libxmu-dev libxi-dev libusb-1.0-0-dev
+                  </code>
+                  <p class="text-justify">
+                    Clone o repositório libfreenect no seu sistema <br>
+                    <code class="ml-3 ">git clone https://github.com/OpenKinect/libfreenect.git
+                    </code>
+                  </p>
+                  <p class="text-justify">
+                    Instale a libfreenect <br>
+                    <pre>
+  cd libfreenect
+  mkdir build
+  cd build
+  cmake -L ..
+  make
+  sudo make install
+  sudo ldconfig /usr/local/lib64/
+                    </pre>
+                    Para testar execute: <code>sudo freenect-glview</code> <br> 
+                    Se tudo ocorreu bem deve abrir uma tela bem parecida com essa:
+                  </p>
+
+                  <div class="container">
+                    <div class="row">
+  
+                      <div class="col">
+                        <figure class="figure">
+                          <img src="img/libfreenect.png" class="figure-img img-fluid rounded"
+                            alt="Imagem de um quadrado genérico com bordas arredondadas, em uma figure.">
+                          <figcaption class="figure-caption text-center">Imagem do freenect-glview em funcionamento</figcaption>
+                        </figure>
+                      </div>
+  
+                    </div>
+                  </div>
+
+                  <p class="text-justify">
+                    Para usar o Kinect com opencv e python, é necessário instalar os wrappers python para libfreenct e as dependências necessárias
+                    
+                    <pre>
+  sudo apt-get install cython
+  sudo apt-get install python-dev
+  sudo apt-get install python-numpy</pre>
+                    Depois vá para o diretório /Libfreenect / wrappers / python e execute o seguinte comando <code>sudo python setup.py install
+                    </code>  <br>
+                    Pronto agora é só programar, logo a baixo tem alguns exemplos e os links para o <a target="_blenk" href="https://github.com/alysonmiguel/PalmaS">github</a> 
+                  </p>
               </div>
             </div>
           </div>

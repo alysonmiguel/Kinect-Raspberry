@@ -59,7 +59,7 @@ p {
 }
 #Raspberry {
   padding: 30px 0px;
-  background-color: rgb(251, 251, 251);
+  background-color: #9F9E9E;
 }
 
 #como {
@@ -128,7 +128,7 @@ p {
 }
 
 .footer{
-  background-color:#9F9E9E;
+  background-color:#131314;
 }
 
 .btn-contato:hover{
